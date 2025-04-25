@@ -42,6 +42,12 @@ public class EventoService {
                 .flatMap(repositorio::delete);
     }
 
+    public Flux<EventoDto> obterPorTipo(String tipo) {
+        TipoEvento tipoEvento = TipoEvento.valueOf(tipo.toUpperCase());
+        return repositorio.findByTipo(tipoEvento)
+                        .map(EventoDto::toDto);
+   }
+    
     public Mono<EventoDto> alterar(Long id, EventoDto dto) {
         return repositorio.findById(id)
                 .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Id do evento não encontrado.")))

@@ -3,7 +3,7 @@ package br.com.romulo.ms_estudo_webflux;
 import java.time.LocalDate;
 
 public record EventoDto(Long id,
-        TtipoEvento tipo,
+        TipoEvento tipo,
         String nome,
         LocalDate data,
         String descricao) {

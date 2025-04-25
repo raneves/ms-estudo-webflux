@@ -1,6 +1,6 @@
 package br.com.romulo.ms_estudo_webflux;
 
-public enum TtipoEvento {
+public enum TipoEvento {
 	 SHOW,
 	 CONCERTO,
 	 TEATRO,

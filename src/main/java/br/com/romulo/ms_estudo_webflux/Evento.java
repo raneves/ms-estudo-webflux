@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Evento {
 	@Id
     private Long id;
-    private TtipoEvento tipo;
+    private TipoEvento tipo;
     private String nome;
     private LocalDate data;
     private String descricao;
@@ -21,10 +21,10 @@ public class Evento {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public TtipoEvento getTipo() {
+	public TipoEvento getTipo() {
 		return tipo;
 	}
-	public void setTipo(TtipoEvento tipo) {
+	public void setTipo(TipoEvento tipo) {
 		this.tipo = tipo;
 	}
 	public String getNome() {
