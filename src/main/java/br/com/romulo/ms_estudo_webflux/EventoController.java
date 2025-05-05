@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import java.time.Duration;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/eventos")
@@ -59,6 +61,7 @@ public class EventoController {
 //    }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<EventoDto> cadastrar(@RequestBody EventoDto dto) {
         return servico.cadastrar(dto)
                 .doOnSuccess(e -> eventoSink.tryEmitNext(e));   //enviar para o sink, assim que cadastrar, se teve sucesso no cadastro, enviar para o sink
@@ -73,5 +76,10 @@ public class EventoController {
     @PutMapping("/{id}")
     public Mono<EventoDto> alterar(@PathVariable Long id, @RequestBody EventoDto dto){
         return servico.alterar(id, dto);
+    }
+    
+    @GetMapping("/{id}/traduzir/{idioma}")
+    public Mono<String> obterTraducao(@PathVariable Long id, @PathVariable String idioma) {
+        return servico.obterTraducao(id, idioma);
     }
 }
